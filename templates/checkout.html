@@ -1,0 +1,191 @@
+{% extends 'shop.html' %}
+{% load static %}
+{% block title %}Pharmacy-Store{% endblock %}
+{% block content %}
+{% block sub_content %}
+<div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span>
+          <strong class="text-black">Checkout</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% for msg in messages %}
+  <p id="messages">{{msg}}</p>
+  {% endfor %}  
+  <div class="site-section">
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <h2 class="h3 mb-3 text-black">Billing Details</h2>
+          <div class="p-3 p-lg-5 border">
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="c_country" class="text-black" >District <span class="text-danger">*</span></label>
+              <select name="c_country" class="form-control" required>
+                <option value="0">Select a District</option>
+                <option value="1">Anantapur</option>
+                <option value="2">Chittoor</option>
+                <option value="3">East Godavari</option>
+                <option value="4">Guntur</option>
+                <option value="5">YSR Kadapa</option>
+                <option value="6">Krishna</option>
+                <option value="7">Kurnool</option>
+                <option value="8">Nellore</option>
+                <option value="9">Prakasam</option>
+                <option value="10">Srikakulam</option>
+                <option value="11">Vijayanagaram</option>
+                <option value="12">Visakapatnam</option>
+                <option value="13">West Godavari</option>
+              </select>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="c_fname" name="c_fname" required>
+              </div>
+              <div class="col-md-6">
+                <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="c_lname" name="c_lname" required>
+              </div>
+            </div>
+  
+  
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="c_address" name="c_address" placeholder="Street address" required>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
+            </div>
+  
+            <div class="form-group row mb-5">
+                <div class="col-md-6">
+                    <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip" required>
+                </div>
+              <div class="col-md-6">
+                <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="c_phone" name="c_phone" placeholder="Phone Number" required>
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="c_address" class="text-black">Price<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="price" name="price" value="{{tot}}" readonly>
+              </div>
+            </div>
+            
+  
+            <div class="form-group">
+              <label for="c_order_notes" class="text-black">Order Notes</label>
+              <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control"
+                placeholder="Write your notes here..."></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="Place Order">
+          </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+  
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3 text-black">Coupon Code</h2>
+              <div class="p-3 p-lg-5 border">
+  
+                <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
+                <div class="input-group w-75">
+                  <input type="text" class="form-control" id="c_code" placeholder="Coupon Code" aria-label="Coupon Code"
+                    aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary btn-sm px-4" type="button" id="button-addon2">Apply</button>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+  
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3 text-black">Your Order</h2>
+              <div class="p-3 p-lg-5 border">
+                <table class="table site-block-order-table mb-5">
+                  <thead>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </thead>
+                  <tbody>
+                    {% for i in c %}
+                    <tr>
+                      <td>{{i.Product}}<strong class="mx-2">x</strong>{{i.Quantity}}</td>
+                      <td>Rs {{i.Price}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+  
+                <div class="border mb-3">
+                  <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsebank" role="button"
+                      aria-expanded="false" aria-controls="collapsebank">Direct Bank Transfer</a></h3>
+  
+                  <div class="collapse" id="collapsebank">
+                    <div class="py-2 px-4">
+                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
+                        payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="border mb-3">
+                  <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsecheque" role="button"
+                      aria-expanded="false" aria-controls="collapsecheque">Cheque Payment</a></h3>
+  
+                  <div class="collapse" id="collapsecheque">
+                    <div class="py-2 px-4">
+                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
+                        payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="border mb-5">
+                  <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapsepaypal" role="button"
+                      aria-expanded="false" aria-controls="collapsepaypal">Paypal</a></h3>
+  
+                  <div class="collapse" id="collapsepaypal">
+                    <div class="py-2 px-4">
+                      <p class="mb-0">Make your payment directly into our bank account. Please use your Order ID as the
+                        payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                    </div>
+                  </div>
+                </div>
+
+               
+                <!-- <div class="form-group">
+                  <button class="btn btn-primary btn-lg btn-block" onclick="window.location='thankyou.html'">Place
+                    Order</button>
+                </div> -->
+  
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <!-- </form> -->
+     
+    </div>
+  </div>
+  
+{% endblock %}
+{% endblock %}

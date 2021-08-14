@@ -1,0 +1,118 @@
+{% extends 'shop.html' %}
+{% load static %}
+{% block title %}Pharmacy-Store{% endblock %}
+{% block content %}
+{% block sub_content %}
+<div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        <form class="col-md-12" method="post">
+          <div class="site-blocks-table">
+            <table class="table table-bordered" id="carts">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail">Image</th>
+                  <th class="product-name">Product</th>
+                  <th class="product-price">Price</th>
+                  <th class="product-quantity">Quantity</th>
+                  <th class="product-total">Total</th>
+                  <th class="product-remove">Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in c %}
+                <tr>
+                  <td class="product-thumbnail">
+                    <img src="{{i.Img.url}}" alt="Image" class="img-fluid">
+                  </td>
+                  <td class="product-name">
+                    <h2 class="h5 text-black">{{i.Product}}</h2>
+                  </td>
+                  <td>{{i.Price}}</td>
+                  <td>{{i.Quantity}}</td>
+                  <td>{{i.Total}}</td>
+                  <td><a href="{% url 'delete_person' i.id %}" class="btn btn-primary height-auto btn-sm">X</a></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <button class="btn btn-primary btn-md btn-block">Update Cart</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-outline-primary btn-md btn-block" onClick="window.location='shop'">Continue Shopping</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="text-black h4" for="coupon">Coupon</label>
+              <p>Enter your coupon code if you have one.</p>
+            </div>
+            <div class="col-md-8 mb-3 mb-md-0">
+              <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary btn-md px-4">Apply Coupon</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pl-5">
+          <div class="row justify-content-end">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-12 text-right border-bottom mb-5">
+                  <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">Subtotal</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">{% for i in c %}+{{i.Total}}<br>{% endfor %}</strong>
+                </div>
+              </div>
+              <div class="row mb-5">
+                <div class="col-md-6">
+                  <span class="text-black">Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black" id="price">{{tot}}</strong>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout'">Proceed To
+                    Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+{% endblock %}
+
+<script>
+  document.getElementById('carts').onloadeddata = function() {myfun()}
+  function myfun() {
+    alert();
+    var tot_price = 0;
+    tot_price += i.Total;
+    document.getElementById('price').innerHTML='tot_price';
+  }
+  //function price() {
+  //  var tot_price = 0;
+  //  tot_price += {{i.Total}};
+  //  document.getElementById('price').innerHTML="tot_price";
+  //}
+</script>

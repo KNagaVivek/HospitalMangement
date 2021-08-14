@@ -1,0 +1,227 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="{% static 'script.js'%}"></script>
+    
+    <title>HOSPITAL MANAGEMENT</title>
+
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+  </html>
+
+
+
+
+
+
+<!-- {%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css files/main3.css'%}">
+    <title>HOSPITAL MANAGEMENT</title>
+    <script src="{% static 'script.js'%}"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        
+</head>
+<body>
+  {% for dest in m %}
+    <header id="top">
+        <nav class="navbar">
+            <div class="logoimg"><img src="{% static 'img/logo.png'%}"></div>
+            <div class="brand-title">{{dest.title}}</div>
+            <a href="#" class="toggle-button">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pharmacy</a></li>
+                <li><span><a href="#">Appointment</a>
+                    <nav class="dropdown">
+                        <a href="#">View Appointments</a>
+                        <a id="did1" href="#">Book an Appointment</a>
+                        <a id="did2" href="javascript:toggle()" onclick="document.getElementById('id03').style.display='block';document.getElementById('id02').style.display='none';document.getElementById('id01').style.display='none'">Book an Appointment</a>
+                    </nav></span></li>
+                <li><a href="#">ContactUs</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#" style="color: aquamarine;">Hello,{{user.last_name}}</a></li>
+									<li><a href="account/logout">Logout</a></li>
+                {% else %}
+                <li><a href="account/register">Register</a></li>
+                <li><a href="account/login">Login</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+         
+    </header>
+
+    <div class="image-bg">
+        <div class="info">{{dest.des}}</div>
+          <div class="appointment-form">
+            <form method="post" onsubmit="return appointment_check()" action="#">
+                <strong>GET AN APPOINTMENT</strong>
+                <label>NAME :</label><br>
+                <input type="text" placeholder="Name" id="apname" required><br>
+                <small id="er1">Name must contain 5-50 words only</small><br>
+                <label>PHONE NUMBER :</label><br>
+                <input type="text" placeholder="Phone Number" id="apnum" required><br>
+                <small id="er2">Phone Number must contains 10 digits & start with 6-9</small><br>
+                <label>PROBLEM :</label><br>
+                <textarea placeholder="problem" id="approb" required></textarea><br>
+                <small id="er3">Must specify your Problem</small><br>
+                <input type="submit" value="send">
+                <label>REACH YOU BY AN PHONE CALL</label>
+            </form>
+        </div>
+    </div>     
+
+    <div class="content"> 
+        <div class="text-title">THE BEST FACILITIES IN OUR HOSPITAL ARE THE BELOW</div>
+        <div>
+            <img src="{{dest.Lab_img.url}}">
+            <a href="#"><img src="{{dest.Pharmacy_img.url}}"></a>
+        </div>
+        <div class="text-left">LABS</div>
+        <div class="text-right">PHARMACY</div>
+        <div class="text-left-span"><span>GIVES THE RESULTS QUICKLY AS SOON AS POSSIBLE</span></div>
+        <div class="text-right-span"><span>BEST MEDICINES AVAILABLE FOR THE PATIENTS TO RECOVER QUICKLY</span></div>
+        <div>
+            <img src="{{dest.equipments_img1.url}}">
+            <img src="{{dest.equipments_img2.url}}">
+        </div>
+        <div class="text">WE HAVE THE ABOVE EQUIPMENTS FOR TREATING THE PATIENTS AND GIVES OUR BEST</div>
+    </div>
+    
+    <footer>
+        <div class="link"><hr>
+          <div class="icons">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-github"></a> 
+        </div>
+            <div class="add">
+                <strong>Contact US :</strong>
+                <address>
+                     {{dest.number}}<br>
+                    {{dest.add}}
+                </address>
+            </div>
+            <div class="right-link">
+                
+                <label>&#169 hospital management -2021</label>
+            </div>
+        </div>
+    </footer>
+
+    
+      <div id="id03" class="modal">
+  
+        <form class="modal-content" onsubmit="return appointment_check()" action="#" method="post">
+          <h3>Get An Appointment</h3>
+          
+            <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+          <div class="container">
+            <label for="Name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" id="apname" required>
+            <small id="er1">Name must contain 5-50 words only</small><br>
+            <label for="number"><b>Phone Number</b></label>
+            <input type="tel" placeholder="Enter Phone Number" id="apnum" required>
+            <small id="er2">Phone Number must contains 10 digits & start with 6-9</small><br>
+            <label for="prob"><b>Problem</b></label>
+            <textarea placeholder="Problem" id="approb"></textarea>
+            <small id="er3">Must specify your Problem</small><br>
+            <input type="submit" value="Send">
+          </div>
+      
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Reach you by an phone call</span>
+          </div>
+        </form>
+      </div>
+
+      
+      {% endfor %}
+
+</body>
+<script src="{% static 'script2.js'%}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    function toggle() {
+        document.getElementsByClassName('navbar-links')[0].classList.toggle('active');
+    }
+</script>
+<script>
+    var modal = document.getElementById('id01');
+    var modal1 = document.getElementById('id02');
+    var modal2 = document.getElementById('id03');    
+    window.onclick = function(event) {
+        if (event.target == modal || event.target == modal1 || event.target == modal2) {
+            modal.style.display = "none";
+            modal1.style.display = "none";
+            modal2.style.display = "none";
+        }
+    }
+</script>
+</html> -->
