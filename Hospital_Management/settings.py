@@ -23,16 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_(2((ay)qa_4w%og!a8b-f)c1n!=(esd^0eev1f3qu-cieh=x%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = ['hospital-manages.herokuapp.com/','127.0.0.1']
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['hospitalmanages.herokuapp.com','127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'management.apps.ManagementConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 ROOT_URLCONF = 'Hospital_Management.urls'
 
 TEMPLATES = [
@@ -77,22 +75,25 @@ WSGI_APPLICATION = 'Hospital_Management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Hospital Management',
-        'USER': 'postgres',
-        'PASSWORD':'Vivek@123',
-        'HOST': 'localhost'
-    }
-}
-
-# DATABASE = {
+# DATABASES = {
 #     'default': {
-#         'ENGINE':'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Hospital Management',
+#         'USER': 'postgres',
+#         'PASSWORD':'Vivek@123',
+#         'HOST': 'localhost'
 #     }
 # }
+
+DATABASE = {
+    'default': {
+        'ENGINE':'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+    }
+}
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASE['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
